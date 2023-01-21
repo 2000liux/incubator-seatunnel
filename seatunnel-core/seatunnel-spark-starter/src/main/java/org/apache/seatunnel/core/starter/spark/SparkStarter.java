@@ -36,6 +36,8 @@ import org.apache.seatunnel.shade.com.typesafe.config.ConfigFactory;
 import org.apache.seatunnel.shade.com.typesafe.config.ConfigResolveOptions;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -61,6 +63,7 @@ import java.util.stream.Stream;
  * A Starter to generate spark-submit command for SeaTunnel job on spark.
  */
 public class SparkStarter implements Starter {
+    private static final Logger LOG = LoggerFactory.getLogger(SparkStarter.class);
 
     /**
      * original commandline args
@@ -96,7 +99,7 @@ public class SparkStarter implements Starter {
     public static void main(String[] args) throws IOException {
         SparkStarter starter = getInstance(args);
         List<String> command = starter.buildCommands();
-        System.out.println(String.join(" ", command));
+        LOG.info("spark starter command = {}", String.join(" ", command));
     }
 
     /**

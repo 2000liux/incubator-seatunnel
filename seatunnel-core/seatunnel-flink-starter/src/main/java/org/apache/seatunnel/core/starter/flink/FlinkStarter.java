@@ -23,6 +23,9 @@ import org.apache.seatunnel.core.starter.enums.EngineType;
 import org.apache.seatunnel.core.starter.flink.args.FlinkCommandArgs;
 import org.apache.seatunnel.core.starter.utils.CommandLineUtils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,6 +34,8 @@ import java.util.Objects;
  * The SeaTunnel flink starter, used to generate the final flink job execute command.
  */
 public class FlinkStarter implements Starter {
+    private static final Logger LOG = LoggerFactory.getLogger(FlinkStarter.class);
+
     private static final String APP_NAME = SeaTunnelFlink.class.getName();
     public static final String APP_JAR_NAME = EngineType.FLINK.getStarterJarName();
     public static final String SHELL_NAME = EngineType.FLINK.getStarterShellName();
@@ -48,7 +53,7 @@ public class FlinkStarter implements Starter {
     @SuppressWarnings("checkstyle:RegexpSingleline")
     public static void main(String[] args) {
         FlinkStarter flinkStarter = new FlinkStarter(args);
-        System.out.println(String.join(" ", flinkStarter.buildCommands()));
+        LOG.info("flink starter command = {}", String.join(" ", flinkStarter.buildCommands()));
     }
 
     @Override
